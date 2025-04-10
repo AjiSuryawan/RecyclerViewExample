@@ -19,12 +19,13 @@ public class AdapterListMakanan extends RecyclerView.Adapter<AdapterListMakanan.
         void onItemClick(MakananModel makananModel);
     }
 
-    // konstruktor add parameternya
+    // konstruktor add parameternya, untuk komunikasi dari activity menuju ke adapter
     public AdapterListMakanan(ArrayList<MakananModel> listMakananModel , OnItemClickListener listener){
         this.listMakananModel = listMakananModel;
         this.listener = listener;
     }
 
+    // dijalan kan hanya satu kali
     @NonNull
     @Override
     public ListMakananViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,6 +34,8 @@ public class AdapterListMakanan extends RecyclerView.Adapter<AdapterListMakanan.
         return new ListMakananViewHolder(itemView);
     }
 
+    // dijalankan sebanyak jumlah datanya, gunanya untuk memasang data nya ke RV per item.
+    // ayam goreng , sate ayam
     @Override
     public void onBindViewHolder(@NonNull ListMakananViewHolder holder, int position) {
         MakananModel makananModel = this.listMakananModel.get(position);
@@ -43,11 +46,13 @@ public class AdapterListMakanan extends RecyclerView.Adapter<AdapterListMakanan.
         holder.itemView.setOnClickListener(v -> listener.onItemClick(makananModel));
     }
 
+    // untuk memberikan informasi jumlah datanya ke RV
     @Override
     public int getItemCount() {
         return this.listMakananModel.size();
     }
 
+    // ini adalah inner class (class di dalam class) gunanya untuk findviewbyid
     public static class ListMakananViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvNamaMakanan;

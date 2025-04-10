@@ -1,5 +1,6 @@
 package com.example.recyclerviewexample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterListMakana
         dataMakanan.add(new MakananModel("Bubur Ayam", "Rp.10.000"));
         dataMakanan.add(new MakananModel("Ayam Bakar", "Rp.10.000"));
         dataMakanan.add(new MakananModel("Sate Ayam", "Rp.10.000"));
+        dataMakanan.add(new MakananModel("Ayam bakar", "Rp.15.000"));
 
         // call adapter class
         AdapterListMakanan adapterListMakanan = new AdapterListMakanan(dataMakanan, this);
@@ -40,6 +42,11 @@ public class MainActivity extends AppCompatActivity implements AdapterListMakana
 
     @Override
     public void onItemClick(MakananModel makananModel) {
-        Toast.makeText(this, makananModel.getNamaMakanan(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, makananModel.getNamaMakanan() + " , " + makananModel.getHargaMakanan(), Toast.LENGTH_SHORT).show();
+        // dari Mainactivity menuju ke detail
+        Intent in = new Intent(MainActivity.this, DetailMakanan.class);
+        // memberikan datanya / melempar
+        in.putExtra("namaMakanan",makananModel.getNamaMakanan());
+        startActivity(in);
     }
 }
